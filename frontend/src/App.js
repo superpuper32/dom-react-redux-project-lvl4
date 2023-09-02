@@ -5,9 +5,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Main />} >
+          <Route index element={<div>No page is selected.</div> } />
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
