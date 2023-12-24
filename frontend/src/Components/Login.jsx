@@ -17,9 +17,9 @@ const SignupSchema = Yup.object().shape({
 export const Login = () => {
     return (
         <>
-            <div class="container-fluid h-100">
-                <div class="row justify-content-center">
-                    <div class="col-4 mt-4">
+            <div className="container-fluid h-100">
+                <div className="row justify-content-center">
+                    <div className="col-4 mt-4">
                         <h1>Sign in</h1>
                         <Formik
                             initialValues={{
@@ -56,7 +56,7 @@ export const Login = () => {
                                             <div>{errors.password}</div>
                                         ) : null}
                                     </div>
-                                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                    <button type="submit" className="btn btn-outline-primary">Submit</button>
                                 </Form>
                             )}
                         </Formik>
