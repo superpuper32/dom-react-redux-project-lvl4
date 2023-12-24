@@ -5,9 +5,9 @@ import { Link, Outlet } from 'react-router-dom';
 export const Main = () => {
     return (
         <>
-            <nav class="navbar navbar-light bg-light">
-                <div class="container-fluid">
-                    <Link to="#" class="navbar-brand">Chat (Slack)</Link>
+            <nav className="navbar navbar-light bg-light">
+                <div className="container-fluid">
+                    <Link to="#" className="navbar-brand">Chat (Slack)</Link>
                 </div>
             </nav>
             
