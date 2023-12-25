@@ -1,5 +1,5 @@
-import { Main } from './Main';
-import { Login } from './Login';
-import { NotFound } from './NotFound';
+import Main from './main/Main';
+import Login from './Login';
+import ErrorPage from './ErrorPage';
 
-export { Main, Login, NotFound };
+export { Main, Login, ErrorPage };
