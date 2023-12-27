@@ -1,29 +1,34 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { RouterProvider } from 'react-router-dom';
 
-import { ErrorPage, Login, Main } from './components';
+import AuthContext from './contexts';
 
-import Root from './routes/root';
+import router from './router';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/',
-        element: <Main />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-    ],
-  },
-]);
+const AuthProvider = ({ children }) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const logIn = useMemo(() => () => setLoggedIn(true), []);
+  const logOut = useMemo(() => () => {
+    localStorage.removeItem('userId');
+    setLoggedIn(false);
+  }, []);
+
+  const valueProperties = useMemo(() => ({
+    loggedIn, logIn, logOut,
+  }), [loggedIn, logIn, logOut]);
+
+  return (
+    <AuthContext.Provider value={valueProperties}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
 const App = () => (
-  <RouterProvider router={router} />
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
 );
 
 export default App;
