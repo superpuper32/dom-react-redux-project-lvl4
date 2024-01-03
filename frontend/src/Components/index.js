@@ -1,5 +1,5 @@
 import Main from './main/Main';
-import Login from './Login';
-import ErrorPage from './ErrorPage';
+import Login from './login/Login';
+import ErrorPage from './error/ErrorPage';
 
 export { Main, Login, ErrorPage };
