@@ -1,10 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import { useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import axios from 'axios';
 import * as Yup from 'yup';
 
+import useAuth from '../../hooks/useAuth.jsx';
+
+import routes from '../../routes/routes.js';
+
 const SignupSchema = Yup.object().shape({
-  nickname: Yup.string()
+  username: Yup.string()
     .min(2, 'Минимум 2 буквы')
     .max(50, 'Максимум 50 букв')
     .required()
@@ -16,9 +22,32 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const auth = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const inputRef = useRef();
+
   const initialValues = {
     username: '',
     password: '',
+  };
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  const handleRequest = async (values) => {
+    try {
+      const response = await axios.post(routes.loginPath(), values);
+
+      auth.logIn();
+      window.localStorage.setItem('userId', JSON.stringify(response.data));
+
+      const { from } = location.state;
+      navigate(from);
+    } catch (e) {
+      throw new Error(e);
+    }
   };
 
   return (
@@ -33,10 +62,7 @@ const Login = () => {
             <Formik
               initialValues={initialValues}
               validationSchema={SignupSchema}
-              onSubmit={({ setSubmitting }) => {
-                console.log('Form is validated! Submitting the form...');
-                setSubmitting(false);
-              }}
+              onSubmit={handleRequest}
             >
               {({ errors, touched }) => (
                 <Form className="col-12 col-md-6 mt-3 mt-mb-0">
