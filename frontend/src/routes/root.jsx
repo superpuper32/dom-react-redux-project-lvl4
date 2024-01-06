@@ -1,7 +1,20 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+
+import { Button, Navbar } from 'react-bootstrap';
+
+import useAuth from '../hooks/useAuth';
+
+const AuthButton = () => {
+  const auth = useAuth();
+
+  return (
+    auth.loggedIn
+      ? <Button onClick={auth.logOut}>Выйти</Button>
+      : null
+  );
+};
 
 const Root = () => (
   <div className="h-100 bg-light">
@@ -10,8 +23,10 @@ const Root = () => (
         <Navbar className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
           <Container>
             <Navbar.Brand href="/">Super Chat</Navbar.Brand>
+            <AuthButton />
           </Container>
         </Navbar>
+
         <div className="container-fluid h-100">
           <Outlet />
         </div>
