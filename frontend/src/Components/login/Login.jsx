@@ -84,6 +84,7 @@ const Login = () => {
                   value={formik.values.username}
                   ref={inputRef}
                   isInvalid={authFailed || !!formik.errors.username}
+                  autoComplete="username"
                 />
                 <Form.Control.Feedback type="invalid" tooltip>
                   {formik.errors.username}
@@ -103,6 +104,7 @@ const Login = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                   isInvalid={authFailed || !!formik.errors.password}
+                  autoComplete="current-password"
                 />
                 <Form.Control.Feedback type="invalid" tooltip>
                   {formik.errors.password}
