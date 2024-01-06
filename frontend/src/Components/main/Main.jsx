@@ -1,22 +1,20 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import useAuth from '../../hooks/useAuth.jsx';
 
-const Main = () => {
+const PrivateRoute = ({ children }) => {
   const auth = useAuth();
-  const navigate = useNavigate();
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    if (!auth.loggedIn) {
-      return navigate('/login');
-    }
-  }, [auth, navigate]);
+  const location = useLocation();
 
   return (
-    <h1>Chat Super</h1>
+    auth.loggedIn ? children : <Navigate to="/login" state={{ from: location }} />
   );
 };
+
+const Main = () => (
+  <PrivateRoute>
+    <h1>Chat Super</h1>
+  </PrivateRoute>
+);
 
 export default Main;
