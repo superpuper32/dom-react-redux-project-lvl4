@@ -23,15 +23,13 @@ const Root = () => (
         <Navbar className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
           <Container>
             <Navbar.Brand>
-              <Link to="/">Super Chat</Link>
+              <Link to="/" className="navbar-brand">Super Chat</Link>
             </Navbar.Brand>
             <AuthButton />
           </Container>
         </Navbar>
 
-        <div className="container-fluid h-100">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
   </div>

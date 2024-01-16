@@ -1,5 +1,4 @@
-import Main from './main/Main';
-import Login from './login/Login';
-import ErrorPage from './error/ErrorPage';
+import ChannelsTab from './channelsTab/ChannelsTab';
+import Chat from './chat/Chat';
 
-export { Main, Login, ErrorPage };
+export { ChannelsTab, Chat };
