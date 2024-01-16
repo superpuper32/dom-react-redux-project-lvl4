@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 
 import { Button, Navbar } from 'react-bootstrap';
@@ -22,7 +22,9 @@ const Root = () => (
       <div className="d-flex flex-column h-100">
         <Navbar className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
           <Container>
-            <Navbar.Brand href="/">Super Chat</Navbar.Brand>
+            <Navbar.Brand>
+              <Link to="/">Super Chat</Link>
+            </Navbar.Brand>
             <AuthButton />
           </Container>
         </Navbar>

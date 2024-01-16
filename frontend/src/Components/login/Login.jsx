@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { Form, FloatingLabel } from 'react-bootstrap';
 
 import useAuth from '../../hooks/useAuth.jsx';
-import routes from '../../routes/routes.js';
+import routes from '../../utils/routes.js';
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -42,8 +42,7 @@ const Login = () => {
 
       try {
         const response = await axios.post(routes.loginPath(), values);
-        window.localStorage.setItem('userId', JSON.stringify(response.data));
-        auth.logIn();
+        auth.logIn(response.data);
         const { from } = location.state;
         navigate(from);
       } catch (error) {
@@ -84,6 +83,7 @@ const Login = () => {
                   value={formik.values.username}
                   ref={inputRef}
                   isInvalid={authFailed || !!formik.errors.username}
+                  autoComplete="username"
                 />
                 <Form.Control.Feedback type="invalid" tooltip>
                   {formik.errors.username}
@@ -103,6 +103,7 @@ const Login = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                   isInvalid={authFailed || !!formik.errors.password}
+                  autoComplete="current-password"
                 />
                 <Form.Control.Feedback type="invalid" tooltip>
                   {formik.errors.password}
