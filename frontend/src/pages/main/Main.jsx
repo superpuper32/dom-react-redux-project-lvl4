@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import { ChannelsTab, Chat } from '../../components';
+import renderModal from '../../components/modals';
 import { addChannels } from '../../redux/slices/channelsSlice.js';
 import { addMessages } from '../../redux/slices/messagesSlice.js';
 import useAuth from '../../hooks/useAuth.jsx';
@@ -39,15 +40,15 @@ const Main = () => {
     };
 
     fetchData();
-  });
+  }, [dispatch]);
 
   return (
     <PrivateRoute>
       <div className="container h-100 my-4 overflow-hidden rounded shadow">
         <div className="row h-100 bg-white flex-md-row">
           <ChannelsTab />
-
           <Chat />
+          {renderModal()}
         </div>
       </div>
     </PrivateRoute>
