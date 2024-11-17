@@ -18,8 +18,6 @@ const MessagesBox = ({ messages }) => {
     return <div id="messages-box" className="chat-messages overflow-auto px-5 " />;
   }
 
-  console.log('messages - ', messages);
-
   return (
     <div id="messages-box" className="chat-messages overflow-auto px-5 ">
       {messages.map((message) => <Message key={message.id} message={message} />)}
