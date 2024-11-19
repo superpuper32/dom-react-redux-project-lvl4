@@ -1,8 +1,7 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-
-import { Button, Navbar } from 'react-bootstrap';
+import { Button, Container, Navbar } from 'react-bootstrap';
+// import Container from 'react-bootstrap/Container';
 
 import useAuth from '../hooks/useAuth.tsx';
 
@@ -25,6 +24,7 @@ const Root: React.FunctionComponent = () => (
             <Navbar.Brand>
               <Link to="/" className="navbar-brand">Chat</Link>
             </Navbar.Brand>
+
             <AuthButton />
           </Container>
         </Navbar>

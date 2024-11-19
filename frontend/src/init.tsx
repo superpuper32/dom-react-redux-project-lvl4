@@ -2,8 +2,10 @@
 
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+
 import App from './App.tsx';
 import resources from './locales/index.ts';
+import AuthProvider from './providers/AuthProvider.tsx';
 import './assets/application.scss';
 import './index.css';
 
@@ -19,7 +21,9 @@ const init = async () => {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </I18nextProvider>
   );
 };
