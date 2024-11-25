@@ -6,11 +6,11 @@ import { Button, Container, Navbar } from 'react-bootstrap';
 import useAuth from '../hooks/useAuth.tsx';
 
 const AuthButton = () => {
-  const auth = useAuth();
+  const { logOut, loggedIn } = useAuth();
 
   return (
-    auth.loggedIn
-      ? <Button onClick={auth.logOut}>Выйти</Button>
+    loggedIn
+      ? <Button onClick={() => logOut()}>Выйти</Button>
       : null
   );
 };
