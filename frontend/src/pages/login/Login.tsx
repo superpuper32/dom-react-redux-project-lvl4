@@ -10,9 +10,9 @@ import routes from '../../utils/routes.ts';
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
-    .min(2, 'Минимум 2 буквы')
-    .max(50, 'Максимум 50 букв')
-    .required('Required')
+    .min(2, 'Minimum 2 characters')
+    .max(50, 'Maximum 50 characters')
+    .required('Required field')
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name'),
   password: Yup.string()
     .required('No password provided.')
@@ -22,14 +22,15 @@ const SignupSchema = Yup.object().shape({
 
 const Login = () => {
   const auth = useAuth();
-  const [authFailed, setAuthFailed] = useState<boolean>(false);
+  const [submited, setSubmited] = useState<boolean>(false);
   const location = useLocation();
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null!);
+  const inputPasswordRef = useRef<HTMLInputElement>(null!);
 
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+  }, [submited]);
 
   const formik = useFormik({
     initialValues: {
@@ -38,8 +39,6 @@ const Login = () => {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      setAuthFailed(false);
-
       try {
         const response = await axios.post(routes.loginPath(), values);
         auth.logIn(response.data);
@@ -49,8 +48,8 @@ const Login = () => {
         formik.setSubmitting(false);
         const error = err as Error | AxiosError;
         if (axios.isAxiosError(error) && error.response?.status === 401) {
-          setAuthFailed(true);
-          inputRef.current.select();
+          setSubmited(false);
+          inputRef.current.focus();
           return;
         }
         throw error;
@@ -76,20 +75,20 @@ const Login = () => {
                   className="mb-3"
                 >
                   <Form.Control
-                    required
                     id="username"
                     name="username"
                     type="text"
                     onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
                     value={formik.values.username}
                     ref={inputRef}
-                    isInvalid={authFailed || !!formik.errors.username}
+                    isInvalid={!!formik.errors.username}
                     autoComplete="username"
                   />
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {formik.errors.username}
-                  </Form.Control.Feedback>
+                  {formik.touched.username && formik.errors.username ? (
+                    <Form.Control.Feedback type="invalid" tooltip>
+                      {formik.errors.username}
+                    </Form.Control.Feedback>
+                  ) : null}
                 </FloatingLabel>
 
                 <FloatingLabel
@@ -97,22 +96,27 @@ const Login = () => {
                   className="mb-3"
                 >
                   <Form.Control
-                    required
                     id="password"
                     name="password"
                     type="password"
                     onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
                     value={formik.values.password}
-                    isInvalid={authFailed || !!formik.errors.password}
+                    ref={inputPasswordRef}
+                    isInvalid={!!formik.errors.password}
                     autoComplete="current-password"
                   />
-                  <Form.Control.Feedback type="invalid" tooltip>
-                    {formik.errors.password}
-                  </Form.Control.Feedback>
+                  {formik.touched.password && formik.errors.password ? (
+                    <Form.Control.Feedback type="invalid" tooltip>
+                      {formik.errors.password}
+                    </Form.Control.Feedback>
+                  ) : null}
                 </FloatingLabel>
 
-                <button type="submit" className="w-100 mb-3 btn btn-outline-primary">Войти</button>
+                <button
+                  type="submit"
+                  onClick={() => setSubmited(true)}
+                  className="w-100 mb-3 btn btn-outline-primary"
+                >Войти</button>
               </Form>
             </div>
           </div>
