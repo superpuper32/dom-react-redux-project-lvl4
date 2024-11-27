@@ -1,7 +1,15 @@
 import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
-const Main: React.FunctionComponent = (): React.JSX.Element => (
-  <h1>Chat</h1>
-);
+import useAuth from '../../hooks/useAuth.tsx';
+
+const Main: React.FunctionComponent = (): React.JSX.Element => {
+  const auth = useAuth();
+  const location = useLocation();
+
+  return (
+    auth.loggedIn ? <h1>Main Page</h1> : <Navigate to="/login" state={{ from: location }} />
+  );
+};
 
 export default Main;

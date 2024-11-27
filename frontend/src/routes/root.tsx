@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { Button, Container, Navbar } from 'react-bootstrap';
-// import Container from 'react-bootstrap/Container';
 
 import useAuth from '../hooks/useAuth.tsx';
 
