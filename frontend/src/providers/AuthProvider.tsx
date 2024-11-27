@@ -1,16 +1,16 @@
 import { useState, useMemo, ReactNode } from 'react';
 
-import AuthContext, { LoginResponse } from '../contexts';
+import AuthContext, { TLoginResponse } from '../contexts';
 
-interface AuthProps {
+interface IAuthProps {
   children?: ReactNode;
 }
 
-const AuthProvider = ({ children }: AuthProps) => {
+const AuthProvider = ({ children }: IAuthProps) => {
   const [loggedIn, setLoggedIn] = useState(() => !!localStorage.getItem('userId'));
 
   const valueProperties = useMemo(() => {
-    const logIn = (authData: LoginResponse) => {
+    const logIn = (authData: TLoginResponse) => {
       localStorage.setItem('userId', JSON.stringify(authData));
       setLoggedIn(true);
     };

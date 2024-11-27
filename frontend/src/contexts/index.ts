@@ -1,17 +1,17 @@
 import { createContext } from 'react';
 
-export type LoginResponse = {
+export type TLoginResponse = {
     token: string;
     username: string;
 }
 
-export type AuthContextType = {
+export type TAuthContextType = {
     loggedIn: boolean,
-    logIn: (authData: LoginResponse) => void,
+    logIn: (authData: TLoginResponse) => void,
     logOut: () => void,
 };
 
-const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext<TAuthContextType>({
     logIn: () => {},
     loggedIn: false,
     logOut: () => {},
