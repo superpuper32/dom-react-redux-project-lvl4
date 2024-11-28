@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import useAuth from '../../hooks/useAuth.tsx';
 import routes from '../../utils/routes.ts';
 import getAuthHeader from '../../utils/utils.ts';
+import { addChannels } from '../../redux/slices/channelsSlice.ts';
+import { addMessages } from '../../redux/slices/messagesSlice.ts';
+import { ChannelsTab } from '../../components/index.ts';
 
 interface IProps {
   children: React.JSX.Element;
@@ -20,15 +24,20 @@ const PrivateMain: React.FC<IProps> = ({ children }): React.JSX.Element => {
 };
 
 const Main: React.FC = (): React.JSX.Element => {
-  const [channels, setChannels] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCahnnels = async () => {
-      const response = await axios.get(routes.channels(), {
-        headers: getAuthHeader()
+      const authHeader = getAuthHeader()
+      const {data: channels} = await axios.get(routes.channels(), {
+        headers: authHeader,
+      });
+      const {data: messages} = await axios.get(routes.messages(), {
+        headers: authHeader,
       });
 
-      setChannels(response.data);
+      dispatch(addChannels(channels));
+      dispatch(addMessages(messages));
     }
 
     fetchCahnnels();
@@ -37,12 +46,7 @@ const Main: React.FC = (): React.JSX.Element => {
 
   return (
     <PrivateMain>
-      <>
-        <h1>Main Page</h1>
-        {channels && channels.map(({ id, name }) => (
-          <li key={id}>{name}</li> 
-        ))}
-      </>
+        <ChannelsTab />
     </PrivateMain>
   )
 }

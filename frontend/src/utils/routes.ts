@@ -9,6 +9,7 @@ const routes: Routes = {
   dataPath: () => [apiPath, 'data'].join('/'),
   createPath: () => [apiPath, 'signup'].join('/'),
   channels: () => [apiPath, 'channels'].join('/'),
+  messages: () => [apiPath, 'messages'].join('/'),
 };
 
 export default routes;
