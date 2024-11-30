@@ -5,8 +5,8 @@ import { TChannel } from '../../types';
 
 type TChannelProps = {
     channel: TChannel;
-    activeTab: number;
-    handleClick: (id: number) => () => void;
+    activeTab: string;
+    handleClick: (id: string) => void;
 }
 
 const Channel: React.FC<TChannelProps> = ({ channel, activeTab, handleClick }) => {
@@ -16,7 +16,7 @@ const Channel: React.FC<TChannelProps> = ({ channel, activeTab, handleClick }) =
 
   return (
     <li key={channel.id} className="nav-item w-100">
-      <button type="button" className={btnClass} onClick={handleClick(channel.id)}>
+      <button type="button" className={btnClass} onClick={() => handleClick(channel.id)}>
         <span className="me-1">#</span>
         {channel.name}
       </button>

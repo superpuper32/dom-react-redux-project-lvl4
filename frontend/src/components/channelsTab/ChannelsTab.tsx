@@ -8,12 +8,13 @@ import Channel from './Channel.tsx';
 import Button from './Button.tsx';
 
 const ChannelsTab: React.FC = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState<string>('1');
   const channels = useSelector(channelsSelectors.selectAll);
-  const dispatch = useDispatch();
+//   const dispatch = useDispatch();
 
-  const handleClick = (id: number) => () => {
-    dispatch(setChannel({ id }));
+  const handleClick = (id: string) => {
+    console.log('id', typeof id);
+    // dispatch(setChannel(channels[id]));
     setActiveTab(id);
   };
 

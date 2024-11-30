@@ -1,8 +1,12 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
+import { TChannel } from '../../types';
 
-const channelsAdapter = createEntityAdapter();
+const channelsAdapter = createEntityAdapter({
+  selectId: (channel: TChannel) => channel.id,
+  sortComparer: (a, b) => a.name.localeCompare(b.name),
+});
 
 const initialState = channelsAdapter.getInitialState();
 

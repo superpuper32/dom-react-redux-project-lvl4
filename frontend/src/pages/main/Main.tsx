@@ -36,6 +36,8 @@ const Main: React.FC = (): React.JSX.Element => {
         headers: authHeader,
       });
 
+      console.log(channels);
+
       dispatch(addChannels(channels));
       dispatch(addMessages(messages));
     }
