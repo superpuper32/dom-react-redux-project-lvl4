@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import { TChannel } from '../../types';
 
 type TChannelProps = {
-    channel: TChannel;
-    activeTab: string;
-    handleClick: (id: string) => void;
+  channel: TChannel;
+  activeTab: string;
+  handleClick: (id: string) => void;
 }
 
 const Channel: React.FC<TChannelProps> = ({ channel, activeTab, handleClick }) => {

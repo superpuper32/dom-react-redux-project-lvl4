@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { channelsSelectors } from '../../redux/slices/channelsSlice.js';
 import { messagesSelectors } from '../../redux/slices/messagesSlice';
-import ChatHeader from './ChatHeader.jsx';
-import ChatForm from './ChatForm.tsx';
-import MessagesBox from './MessagesBox.jsx';
 
-const Chat = () => {
+import ChatHeader from './ChatHeader.tsx';
+import ChatForm from './ChatForm.tsx';
+import MessagesBox from './MessagesBox.tsx';
+
+const Chat: React.FC = () => {
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const channel = useSelector((state) => channelsSelectors.selectById(state, currentChannelId));
   const messages = useSelector(messagesSelectors.selectAll);
