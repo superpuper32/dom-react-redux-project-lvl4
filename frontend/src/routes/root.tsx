@@ -14,7 +14,7 @@ const AuthButton = () => {
   );
 };
 
-const Root: React.FunctionComponent = () => (
+const Root: React.FC = () => (
   <div className="h-100 bg-light">
     <div className="h-100">
       <div className="d-flex flex-column h-100">

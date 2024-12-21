@@ -9,8 +9,8 @@ import ChatForm from './ChatForm.tsx';
 import MessagesBox from './MessagesBox.tsx';
 
 const Chat: React.FC = () => {
-  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const channel = useSelector((state) => channelsSelectors.selectById(state, currentChannelId));
+  const currentChannelId = useSelector((state: any) => state.channels.currentChannelId);
+  const channel = useSelector((state: any) => channelsSelectors.selectById(state, currentChannelId));
   const messages = useSelector(messagesSelectors.selectAll);
 
   if (!channel) return null;
